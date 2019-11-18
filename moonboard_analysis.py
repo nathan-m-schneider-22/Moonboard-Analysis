@@ -1,5 +1,5 @@
 from run_model import *
-from problem_parse import *
+from moonboard_problems import *
 from handwritten_digits import *
 import time
 """
@@ -34,19 +34,23 @@ start_time = time.time()
 (train_x,train_y),(test_x,test_y) = get_climb_data("data/moonboard_problems_setup_2016.json",repeats_count=5)
 
 
+#Train the unweighted model, and evaluate it, as well as save a histogram for the results
 unweighted_climb_model = train_model(train_x,train_y)
 evaluate_model(unweighted_climb_model,test_x,test_y,"Climb Categorization (Unweighted Training)",x_axis_offset=4)
 
-weighted_climb_model = train_model(train_x,train_y,weighted=True,class_counts=grade_counts)
+#Train and evaluate the weighted trained model
+weighted_climb_model = train_model(train_x,train_y,class_counts=grade_counts)
 evaluate_model(weighted_climb_model,test_x,test_y,"Climb Categorization (Weighted Training)",x_axis_offset=4,block = True)
 
-
+#Get the imbalanced data from the handwritten digit dataset
 (train_x,train_y),(test_x,test_y) = get_digit_data(grade_counts)
 
+#Train the unweighted model, and evaluate it, as well as save a histogram for the results
 unweighted_digit_model = train_model(train_x,train_y)
-evaluate_model(unweighted_digit_model,test_x,test_y,"Digit Categorization (Unweighted Training)",x_axis_offset=4)
+evaluate_model(unweighted_digit_model,test_x,test_y,"Digit Categorization (Unweighted Training)")
 
-weighted_digit_model = train_model(train_x,train_y,weighted=True,class_counts=grade_counts)
-evaluate_model(weighted_digit_model,test_x,test_y,"Digit Categorization (Weighted Training)",x_axis_offset=4)
+#Train and evaluate the weighted trained model
+weighted_digit_model = train_model(train_x,train_y,class_counts=grade_counts)
+evaluate_model(weighted_digit_model,test_x,test_y,"Digit Categorization (Weighted Training)")
 
 print("Total runtime: ",time.time()-start_time)
