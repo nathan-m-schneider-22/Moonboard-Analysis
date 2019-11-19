@@ -1,6 +1,7 @@
 # Moonboard-Analysis
 This repo holds the nerual net for predicting the V grade of a given moonboard problem, given its stated holds. 
-
+To run this repo, run ` python moonboard_analysis.py `
+Make sure you have the necessary keras, matplotlib, tensorflow, numpy libraries. This repo runs on Python 3.6
 ## Data
 The data are a set of climbs, each climb with a list of holds on the climb, and a difficulty grade. These holds are taken from a grid and mapped into a 142 dimensional input vector. The output vector is a onehot encoded grade from 4-14. You can find moonboard climbs here [https://www.moonboard.com/].
 
